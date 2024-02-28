@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Placement using areas</title>
+    <style>
+        code {
+            color: #6F0505;
+            font-weight: bold;
+        }
+        .container{
+            display: grid;
+            grid-template-columns: auto auto 1fr; 
+            grid-template-areas:
+                    ".       nav welcome"
+                    "sidebar content content"
+                    "footer footer footer";
+            grid-gap: 10px;
+            text-align: center;
+        }
+
+        .container > div {
+            background-color: greenyellow;
+            border-radius: 5px;
+            padding: 20px;
+            font-size: 150%;
+        }
+
+        .container > div:nth-child(2) {
+            grid-area: welcome;
+        }
+
+        .container > footer {
+            grid-area: footer;
+            background: lightyellow;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+        }
+
+        .content {
+            grid-area: content;
+        }
+
+        .container > nav {
+            grid-area: nav;
+            background-color: yellow;
+        }
+
+        .container > nav ul {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Placing elements using areas</h1>
+    <ul>
+        <li>
+            We can create named areas on the grid to put content into using
+            <code>grid-template-areas</code> to describe where on the Grid elements should sit.
+        </li>
+        <li>
+            Assign an element to a Grid Area using the <code>grid-area</code> property.
+        </li>
+        <li>
+            Repeating the name of an area indicates that the area spans that grid track.
+            Using a . indicates an empty track. Such as the very first cell on this grid.
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact us</a></li>
+        </ul>   
+    </nav>
+    <div>Welcome Fulna!</div>
+    <div class="sidebar" contenteditable>Sidebar</div>
+    <div class="content">Content</div>
+    <footer>Copyright QU</footer>
+</div>
+</body>
+</html>

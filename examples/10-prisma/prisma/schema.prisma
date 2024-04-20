@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" //env("DATABASE_URL")
+}
+
+//datasource db {
+//provider = "sqlserver"
+//url      = env("DATABASE_URL")
+//}
+
+model Cat {
+  id       Int    @id @default(autoincrement())
+  name     String
+  imageUrl String
+  breed    String
+  likes    Int    @default(0)
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  posts   Post[]
+  profile Profile?
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  // Used to establish a 1-n relation where each User can have many related Posts
+  authorId  Int // Foreign key (FK) associted to PK of User
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+}
